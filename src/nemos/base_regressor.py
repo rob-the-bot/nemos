@@ -340,6 +340,12 @@ class BaseRegressor(abc.ABC, Base, Generic[UserProvidedParamsT, ModelParamsT]):
         """
         return None
 
+    def _setup_hessian(self) -> None:
+        if hasattr(self, "solver") and isinstance(self.solver, NewtonSolverProtocol):
+            self.solver.setup_hessian(
+                self._get_hess_fn(), self._hess_tag, self.regularizer
+            )
+
     def _instantiate_solver(
         self,
         loss,
