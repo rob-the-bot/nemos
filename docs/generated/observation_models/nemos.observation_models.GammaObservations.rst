@@ -1,0 +1,40 @@
+﻿nemos.observation\_models.GammaObservations
+===========================================
+
+.. currentmodule:: nemos.observation_models
+
+.. autoclass:: GammaObservations
+   :members:
+   :inherited-members:
+
+
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree: ./
+   
+      ~GammaObservations.default_inverse_link_function
+      ~GammaObservations.scale
+   
+
+
+
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree: ./
+   
+      ~GammaObservations.__init__
+      ~GammaObservations.deviance
+      ~GammaObservations.estimate_scale
+      ~GammaObservations.get_params
+      ~GammaObservations.likelihood
+      ~GammaObservations.log_likelihood
+      ~GammaObservations.pseudo_r2
+      ~GammaObservations.sample_generator
+      ~GammaObservations.set_params
+   

@@ -1,0 +1,36 @@
+﻿nemos.basis.\_transformer\_basis.TransformerBasis
+=================================================
+
+.. currentmodule:: nemos.basis._transformer_basis
+
+.. autoclass:: TransformerBasis
+   :members:
+   :inherited-members:
+
+
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree: ./
+   
+      ~TransformerBasis.basis
+   
+
+
+
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree: ./
+   
+      ~TransformerBasis.__init__
+      ~TransformerBasis.fit
+      ~TransformerBasis.fit_transform
+      ~TransformerBasis.get_params
+      ~TransformerBasis.set_params
+      ~TransformerBasis.transform
+   

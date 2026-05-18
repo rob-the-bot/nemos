@@ -1,0 +1,46 @@
+﻿nemos.basis.MSplineEval
+=======================
+
+.. currentmodule:: nemos.basis
+
+.. autoclass:: MSplineEval
+   :members:
+   :inherited-members:
+
+
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree: ./
+   
+      ~MSplineEval.bounds
+      ~MSplineEval.input_shape
+      ~MSplineEval.is_complex
+      ~MSplineEval.label
+      ~MSplineEval.n_basis_funcs
+      ~MSplineEval.n_output_features
+      ~MSplineEval.order
+   
+
+
+
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree: ./
+   
+      ~MSplineEval.__init__
+      ~MSplineEval.compute_features
+      ~MSplineEval.evaluate
+      ~MSplineEval.evaluate_on_grid
+      ~MSplineEval.get_params
+      ~MSplineEval.set_input_shape
+      ~MSplineEval.set_params
+      ~MSplineEval.setup_basis
+      ~MSplineEval.split_by_feature
+      ~MSplineEval.to_transformer
+   
