@@ -255,6 +255,7 @@ class NBGLM(BaseGLM[GLMScaleUserParams, GLMScaleParams]):
         self._set_model_params(params)
         self.aux_ = aux
         self.solver_state_ = state
+        return self
 
     def _compute_loss(
         self,
