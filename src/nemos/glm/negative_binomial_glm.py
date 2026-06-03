@@ -437,18 +437,23 @@ class NBGLM(BaseGLM[GLMScaleUserParams, GLMScaleParams]):
             nll -= jnp.sum(jnp.mean(norm_per_sample, axis=0))
             return nll
 
+        scale_solver_name = "LBFGS"
+        scale_solver_backend = get_solver(scale_solver_name).backend
         solver_kwargs = {
             "tol": 1e-6 if init_params.log_scale.dtype is jnp.float32 else 1e-12,
         }
         if init_params.log_scale.size == 1:
             # history > 1 is equivalent to history 1 for 1d case
-            solver_kwargs.update({"history_size": 1})
+            history_size_key = (
+                "history_size" if scale_solver_backend == "jaxopt" else "memory_size"
+            )
+            solver_kwargs.update({history_size_key: 1})
         solver_scale = self._instantiate_solver(
             _scale_loss,
             init_params.log_scale,
             regularizer=UnRegularized(),
             regularizer_strength=None,
-            solver_name="LBFGS",
+            solver_name=scale_solver_name,
             solver_kwargs=solver_kwargs,
         )
         return solver_scale, _scale_loss

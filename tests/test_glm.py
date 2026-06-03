@@ -3676,15 +3676,28 @@ class TestNegativeBinomialGLMFitMethods:
         init_params = (jnp.zeros(2), jnp.zeros(1), jnp.ones(1))
         return X, y, init_params
 
+    @pytest.fixture(params=["optax+optimistix", "jaxopt"])
+    def lbfgs_backend(self, request):
+        backend = request.param
+        if backend not in nmo.solvers.list_algo_backends("LBFGS"):
+            pytest.skip(f"{backend} LBFGS backend is not available.")
+
+        previous_backend = nmo.solvers.get_solver("LBFGS").backend
+        nmo.solvers.set_default_backend("LBFGS", backend)
+        try:
+            yield backend
+        finally:
+            nmo.solvers.set_default_backend("LBFGS", previous_backend)
+
     @pytest.mark.solver_related
-    def test_fit_glm(self, method):
+    def test_fit_glm(self, method, lbfgs_backend):
         """
-        Ensure that the model can be fit with different optimization methods.
+        Ensure that the model can be fit with different optimization methods and backends.
         """
         X, y, init_params = self.toy_data()
         model = nmo.glm.NBGLM(
             method=method,
-            solver_name="LBFGS",
+            solver_name=f"LBFGS[{lbfgs_backend}]",
             solver_kwargs={"maxiter": 1},
             maxiter=1,
         )
