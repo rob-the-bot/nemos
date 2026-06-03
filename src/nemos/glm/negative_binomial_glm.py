@@ -154,7 +154,7 @@ def _two_step_run(
         y=y,
         solver_run_params=solver_run_params,
         solver_run_scale=solver_run_scale,
-        predict_rate=predict_rate_func,
+        predict_rate_func=predict_rate_func,
         scale_loss=scale_loss,
     )
 
