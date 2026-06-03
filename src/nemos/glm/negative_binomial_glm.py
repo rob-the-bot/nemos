@@ -442,7 +442,7 @@ class NBGLM(BaseGLM[GLMScaleUserParams, GLMScaleParams]):
         }
         if init_params.log_scale.size == 1:
             # history > 1 is equivalent to history 1 for 1d case
-            solver_kwargs.update({"memory_size": 1})
+            solver_kwargs.update({"history_size": 1})
         solver_scale = self._instantiate_solver(
             _scale_loss,
             init_params.log_scale,
