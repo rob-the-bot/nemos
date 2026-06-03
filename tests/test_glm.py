@@ -3663,6 +3663,38 @@ class TestNegativeBinomialGLM:
         assert ratesim.shape == y.shape
 
 
+@pytest.mark.parametrize("method", ["two-step", "joint"])
+class TestNegativeBinomialGLMFitMethods:
+    """
+    Unit tests specific to Negative Binomial GLM with different fit methods.
+    """
+
+    @staticmethod
+    def toy_data():
+        X = jnp.ones((5, 2))
+        y = jnp.array([0, 1, 0, 2, 1], dtype=float)
+        init_params = (jnp.zeros(2), jnp.zeros(1), jnp.ones(1))
+        return X, y, init_params
+
+    @pytest.mark.solver_related
+    def test_fit_glm(self, method):
+        """
+        Ensure that the model can be fit with different optimization methods.
+        """
+        X, y, init_params = self.toy_data()
+        model = nmo.glm.NBGLM(
+            method=method,
+            solver_name="LBFGS",
+            solver_kwargs={"maxiter": 1},
+            maxiter=1,
+        )
+        fitted = model.fit(X, y, init_params=init_params)
+        assert fitted is model
+        assert model.coef_ is not None
+        assert model.intercept_ is not None
+        assert model.scale_ is not None
+
+
 @pytest.mark.parametrize("inv_link", [log_softmax])
 @pytest.mark.parametrize("glm_type", ["", "population_"])
 @pytest.mark.parametrize("model_instantiation", ["classifierGLM_model_instantiation"])
